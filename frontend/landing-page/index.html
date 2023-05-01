@@ -78,8 +78,8 @@
             <input class="form-control me-2" type="search" placeholder="Find Mentorship On" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form> -->
-          <button class="btn btn-primary ms-lg-3 me-lg-3">LOGIN</button>
-          <button class="btn btn-primary me-lg-3">SIGNUP</button>
+          <button class="btn btn-primary ms-lg-3 me-lg-3" onclick="redirectLoginPage()">LOGIN</button>
+          <button class="btn btn-primary me-lg-3" onclick="redirectSignupPage()">SIGNUP</button>
         </div>
       </div>
     </nav>
@@ -339,3 +339,13 @@
     ></script>
   </body>
 </html>
+
+<script>
+  function redirectLoginPage() {
+    window.location.href = "../login-signup/login.html";
+  }
+  
+  function redirectSignupPage() {
+    window.location.href = "../login-signup/signup.html";
+    }
+  </script>
