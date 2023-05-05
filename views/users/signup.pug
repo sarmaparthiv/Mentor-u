@@ -1,0 +1,51 @@
+doctype html
+// Created By CodingLab - www.codinglabweb.com
+html(dir='ltr', lang='en')
+  head
+    meta(charset='UTF-8')
+    // -<title> Responsive Registration Form | CodingLab </title>-s
+    //- link(rel='stylesheet', href='../asse')
+    style 
+      include ../assets/css/signup.css
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body
+    .container
+      .title Registration
+      .content
+        form(action='/signup' method='POST' id='myForm')
+          .user-details
+            .input-box
+              span.details Full Name
+              input(type='text', name="fullname", placeholder='Enter your name', required='')
+            .input-box
+              span.details Username
+              input(type='text',name="username", placeholder='Enter your username', required='')
+            .input-box
+              span.details Email
+              input(type='text', name="email",placeholder='Enter your email', required='')
+            .input-box
+              span.details Phone Number
+              input(type='text',name="number", placeholder='Enter your number', required='')
+            .input-box
+              span.details Password
+              input(type='text',name="password", placeholder='Enter your password', required='')
+            .input-box
+              span.details Confirm Password
+              input(type='text', placeholder='Confirm your password', required='')
+          .gender-details
+            input#dot-1(type='radio', name='gender')
+            input#dot-2(type='radio', name='gender')
+            input#dot-3(type='radio', name='gender')
+            span.gender-title Gender
+            .category
+              label(for='dot-1')
+                span.dot.one
+                span.gender Male
+              label(for='dot-2')
+                span.dot.two
+                span.gender Female
+              label(for='dot-3')
+                span.dot.three
+                span.gender Prefer not to say
+          .button
+            input(type='submit', value='Register')
