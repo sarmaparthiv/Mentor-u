@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/mentor-u");
+mongoose.connect("mongodb+srv://Kwanzo:dankdatabase@cluster0.8m8trb6.mongodb.net/AllUserDetails?retryWrites=true&w=majority");
 
 
 const express=require("express");
@@ -10,7 +10,7 @@ const bodyParser=require('body-parser');
 //encoding form data
 app.use(bodyParser.json());
 //url encoding
-app.use(bodyParser.urlencoded({extended:true})) //passing extended true as  a object
+app.use(bodyParser.urlencoded({extended:true})) //passing extended true as a object
 
 //for user routes
 // app.use(express.static('/public'));
