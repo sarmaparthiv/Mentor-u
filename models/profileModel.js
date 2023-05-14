@@ -20,4 +20,4 @@ const profileSchema=new mongoose.Schema(
 
 //creating model
 
-module.exports=mongoose.model('User', userSchema)
+module.exports=mongoose.model('MentorProfile', profileSchema)

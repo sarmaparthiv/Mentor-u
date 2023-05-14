@@ -16,8 +16,9 @@ app.use(bodyParser.urlencoded({extended:true})) //passing extended true as a obj
 // app.use(express.static('/public'));
 
 const userRoute=require('./routes/userRoute')
+const mentorRoute=require('./routes/mentorRoute')
 app.use('/',userRoute);
-
+app.use('/mentor',mentorRoute);
 app.listen(3000,function(){ 
             console.log("Server is running..");
 });
