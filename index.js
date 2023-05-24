@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 //url encoding
 app.use(bodyParser.urlencoded({extended:true})) //passing extended true as  a object
 
+
 //for user routes
 // app.use(express.static('/public'));
 
