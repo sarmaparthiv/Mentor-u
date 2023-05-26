@@ -1,7 +1,6 @@
 const { ObjectId } = require('mongodb');
 const User=require('../models/userModel');
 
-
 //using bcrypt
 const bcrypt=require('bcrypt');
 
@@ -88,22 +87,18 @@ const verifyLogin=async(req,res)=>{
             const passwordMatch=await bcrypt.compare(password,userData.password);
             if (passwordMatch) {
                 if(userData.is_verified===0){
-                    console.log('1');
                     res.render('login',{message:"please verify your mail"});
                 }else{
                     req.session.user_id=userData._id;
-                    console.log('2');
                     res.redirect('/home');
                 }
                 
             } else {
-                console.log('3');
                 res.render('login',{message:"Email/password are incorrect!"});
             
             }
             
         } else {
-            console.log('4');
             res.render('login',{message:"Email/password are incorrect!"})
             
         }
@@ -121,7 +116,10 @@ const loadHome=async(req,res)=>{
         // const user = await user.getUser();
         // req.user = user;
         const userData=await User.findById({ _id:req.session.user_id });
-        res.render('home',{user:userData});
+        const hasNotification = true
+        res.render('profile',{user:userData, hasNotification:hasNotification});
+        // res.render('profile');
+
         
     } catch (error) {
         console.log(error.message);
@@ -145,9 +143,10 @@ const userLogout=async(req,res)=>{
 const editUser=async(req,res)=>{
     try {
         // const id='5f4ebe073c6a0d23745063d0';
-        const id = new ObjectId('646b559e44f4b8adda85cb27')
-        // console.log(req)
+        const id = new ObjectId(req.query.id)
         const userData=await User.findById({ _id:id });
+        console.log("user data")
+        console.log(userData)
         if(userData){
             res.render('edit',{user:userData});
         }
@@ -160,6 +159,22 @@ const editUser=async(req,res)=>{
     }
 }
 
+const jobRequest = async(req, res)=>{
+    try{
+        const id = new ObjectId(req.query.id)
+        const userData=await User.findById({ _id:id })
+        if(userData){
+            res.render('jobRequest',{user:userData});
+        }
+        else{
+            res.redirect('/home');
+        }
+    }
+    catch(error){
+        console.log(error.message)
+    }
+}
+
 const updateProfile=async(req,res)=>{
     try {
         const userData=User.findByIdAndUpdate({ _id:req.body.user_id },{ $set:{fullname:req.body.fullname, username:req.body.username, email:req.body.email, number:req.body.number} });
@@ -169,6 +184,15 @@ const updateProfile=async(req,res)=>{
     }
 }
 
+const loadNotifications = async (req, res) => {
+    try {
+        // const userData=User.findByIdAndUpdate({ _id:req.body.user_id },{ $set:{fullname:req.body.fullname, username:req.body.username, email:req.body.email, number:req.body.number} });
+        const dummyNotifications = [{title:"AI mentor 1 hour session", message:"Need an AI mentor for my college project"}]
+        res.render('notifications', {notifications:dummyNotifications});     
+    } catch (error) {
+        
+    }
+}
 
 module.exports={
     loadSignup,
@@ -177,5 +201,7 @@ module.exports={
     verifyLogin,
     loadHome,
     userLogout,
-    editUser
+    editUser,
+    jobRequest,
+    loadNotifications
 }

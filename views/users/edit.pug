@@ -7,17 +7,18 @@ html(lang="en")
         title Edit User
     body 
         form(action="" method="post" enctype="multipart/form-data")
+        
             input(type='hidden' name="user_id" value="#{user._id}")
-            input(type='text' name="fullname" value="#{user.fullname}" placeholder='Enter fullname' required='')
+            input(type='text' name="fullname" value=`${user.fullname}` placeholder='Enter fullname' required='')
             br
             br
-            input(type='text', name="username",value="#{user.username}", placeholder='Enter username', required='')
+            input(type='text', name="username",value=`${user.username}`, placeholder='Enter username', required='')
             br 
             br
-            input(type="email", name="email",value="#{user.email}",placeholder='Enter email', required='')
+            input(type="email", name="email",value=`${user.email}`,placeholder='Enter email', required='')
             br
             br
-            input(type="number", name="number",value="#{user.number}",placeholder='Enter number', required='')
+            input(type="number", name="number",value=`${user.number}`,placeholder='Enter number', required='')
             br
             br
             input(type="submit", value="Update profile")

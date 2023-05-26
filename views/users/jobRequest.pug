@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Freelancer Details
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC", crossorigin="anonymous")
+
+    //- style
+    //-   include ../assets/css/jobRequest.css
+  body
+    .container
+                  
+      div.row
+        div.col-8
+          p.card-text Name: John Doe
+          p.card-text Occupation: Web Developer
+          p.card-text Hourly Rate: $50
+        div.col-4 
+          h5.card-title Job Description
+          p.card-text This is a job description for the freelancer. Provide details about the job here.
+          form(action="/job-request" method="post")
+          input(type="hidden", name="freelancerId", value="#{freelancer._id}")
+          .text-center
+          button.btn.btn-primary(type="submit") Send Job Request
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin="anonymous")
