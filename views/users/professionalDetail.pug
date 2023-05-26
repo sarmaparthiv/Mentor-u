@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title My Resume
+    style 
+      include ../assets/css/professionalDetails.css
+  body
+    h1 Edit Resume
+    form(action="/save", method="POST")
+      label(for="description") Description:
+      textarea#description(name="description", rows="4", cols="50")
+
+      label(for="skills") Skills:
+      input#skills(name="skills", type="text")
+
+      label(for="languages") Languages:
+      input#languages(name="languages", type="text")
+
+      input(type="submit", value="Save")
