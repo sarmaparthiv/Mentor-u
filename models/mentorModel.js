@@ -36,10 +36,23 @@ const mentorSchema=new mongoose.Schema(
         is_verified:{
             type:Number,
             default:1
-        }  
+        },
+        notifications: {
+            type: [{
+              title: {
+                type: String,
+                required: true,
+              },
+              description: {
+                type: String,
+                required: true,
+              },
+            }],
+            default: [],
+          },
     }
 );
 
 //creating model
 
-module.exports=mongoose.model('mentor', mentorSchema)
+module.exports=mongoose.model('Mentor', mentorSchema)

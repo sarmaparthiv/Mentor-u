@@ -2,6 +2,10 @@ const mongoose=require("mongoose");
 
 const profileSchema=new mongoose.Schema(
     {
+        email: {
+            type:String,
+            required:true
+        },
         description:{
             type:String,
             required:true

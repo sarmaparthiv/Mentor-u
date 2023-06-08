@@ -6,7 +6,10 @@ html
       include ../assets/css/professionalDetails.css
   body
     h1 Edit Resume
-    form(action="/save", method="POST")
+    form(action=router, method="POST")
+
+      input(type="hidden" name="email" value=mentor.email)
+
       label(for="description") Description:
       textarea#description(name="description", rows="4", cols="50")
 

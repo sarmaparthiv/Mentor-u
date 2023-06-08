@@ -8,12 +8,15 @@ html(dir='ltr', lang='en')
     style 
         include ../assets/css/signup.css
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    
   body
+
     .container
       .title Registration
       .content
-        form(action='/signup' method='POST' id='myForm')
+        form(action=router, method='POST', id='myForm')
           .user-details
+          
             .input-box
               span.details Full Name
               input(type='text', name="fullname", placeholder='Enter your name', required='')
@@ -51,7 +54,7 @@ html(dir='ltr', lang='en')
             input(type='submit', value='Register')
 
             //- source tree 
-
 -if (typeof message !== 'undefined')
 p(style="color:green;") #{message}
+
 
