@@ -20,7 +20,7 @@ const securePassword=async(password)=>{
 const loadSignup=async(req,res)=>{
     try{
        
-            res.render('signup');        
+            res.render('signup', {router:"/signup"});        
         
     }catch(error){
 
@@ -187,7 +187,7 @@ const updateProfile=async(req,res)=>{
 const loadNotifications = async (req, res) => {
     try {
         // const userData=User.findByIdAndUpdate({ _id:req.body.user_id },{ $set:{fullname:req.body.fullname, username:req.body.username, email:req.body.email, number:req.body.number} });
-        const dummyNotifications = [{title:"AI mentor 1 hour session", message:"Need an AI mentor for my college project"}]
+        const dummyNotifications = [{title:"AI mentor 1 hour session", description:"Need an AI mentor for my college project"}]
         res.render('notifications', {notifications:dummyNotifications});     
     } catch (error) {
         
