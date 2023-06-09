@@ -1,27 +1,135 @@
-html
-  head
-    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css")
-    style
-      include ../assets/css/home.css
-  body
-    include navbar.pug
-    div.container
-      h1 Welcome, #{user.fullname}
-      table.table.table-striped.table-bordered.table-hover
-        tr
-          th fullname:
-          td #{user.fullname}
-        tr
-          th username:
-          td #{user.username}
-        tr
-          th email: 
-          td #{user.email}
-        tr 
-          th number:
-          td #{user.number}
+//- //- html
+//- //-   head
+//- //-     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css")
+//- //-     style
+//- //-       include ../assets/css/home.css
+//- //-   body
+//- //-     include navbar.pug
+//- //-     div.container
+//- //-       h1 Welcome, #{user.fullname}
+//- //-       table.table.table-striped.table-bordered.table-hover
+//- //-         tr
+//- //-           th fullname:
+//- //-           td #{user.fullname}
+//- //-         tr
+//- //-           th username:
+//- //-           td #{user.username}
+//- //-         tr
+//- //-           th email: 
+//- //-           td #{user.email}
+//- //-         tr 
+//- //-           th number:
+//- //-           td #{user.number}
 
-      a(href=`/edit?id=${user._id}`) Edit 
-      br
-      br
-      button.btn.btn-primary(type="button", onclick="location.href='/logout'") Logout
+//- //-       a(href=`/edit?id=${user._id}`) Edit 
+//- //-       br
+//- //-       br
+//- //-       button.btn.btn-primary(type="button", onclick="location.href='/logout'") Logout
+
+
+//- //- --------1st type home feed-----------------------
+
+//- doctype html
+//- html
+//-   head
+//-     meta(charset='utf-8')
+//-     meta(name='viewport', content='width=device-width, initial-scale=1')
+//-     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+//-     style.
+//-       .service-card {
+//-         margin-bottom: 20px;
+//-         padding: 15px;
+//-         background-color: #f8f9fa;
+//-         border-radius: 5px;
+//-       }
+//-       .service-card h4 {
+//-         margin-top: 0;
+//-       }
+//-       .profile-icon {
+//-         font-size: 24px;
+//-         color: #000;
+//-         cursor: pointer;
+//-       }
+
+//-   body
+//-     nav.navbar.navbar-expand-lg.navbar-light.bg-light
+//-       a.navbar-brand(href='#') My App
+//-       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+//-         span.navbar-toggler-icon
+//-       div.collapse.navbar-collapse(id='navbarNav')
+//-         ul.navbar-nav.ml-auto
+//-           li.nav-item
+//-             a.nav-link.profile-icon(data-toggle='modal', data-target='#profileModel')
+//-               i.fas.fa-user
+
+//-     main.container
+//-       each service in services
+//-         .service-card
+//-           h4= service.skills
+//-           //- p= service.description
+//-           p Service Provider: #{service.fullname}
+//-           p Cost: #{service.cost}
+//-           button.btn.btn-primary.mr-2 Purchase
+//-           button.btn.btn-secondary View Service
+
+//-     // Profile Modal
+//-     .modal.fade#profileModal(tabindex='-1', role='dialog', aria-labelledby='profileModalLabel', aria-hidden='true')
+//-       .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+//-         .modal-content
+//-           .modal-header
+//-             h5.modal-title#profileModalLabel My Profile
+//-             button.close(type='button', data-dismiss='modal', aria-label='Close')
+//-               span(aria-hidden='true') &times;
+//-           .modal-body
+//-             // Your profile content goes here
+
+//-   script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KyZXEAg3QhqLMpG8r+Yc12d8+IAXw2Y2FyFg9HIfwtoGvqEWS4DkD3hD5vPmOf6', crossorigin='anonymous')
+//-   script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+//-   script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+
+//- --------------2nd type home feed----------------------
+
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Home Feed
+    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", rel="stylesheet")
+    link(href="style.css", rel="stylesheet")
+  body
+    header
+      .container
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          a.navbar-brand(href="#") MENTOR-U
+          button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+          .collapse.navbar-collapse#navbarSupportedContent
+            ul.navbar-nav.mr-auto
+              li.nav-item.active
+                a.nav-link(href="#") Home
+              li.nav-item
+                a.nav-link(href="#") Services
+              li.nav-item
+                a.nav-link(href="#") Contact
+            ul.navbar-nav.ml-auto
+              li.nav-item
+                a.nav-link(href="#") Profile
+    main.container
+      h1 Welcome
+      hr
+      .card-deck
+        each service in services
+          .card
+            //- img.card-img-top(src=card.image, alt=card.alt)
+            .card-body
+              h5.card-title  #{service.skills} MENTOR
+              p.card-text Description: #{service.description}
+              p.card-text Mentor Name: #{service.fullname}
+               p.card-text Language spoken: #{service.languages}
+              p.card-text Price: #{service.cost}/hr
+            .card-footer
+              button.btn.btn-primary(type="button") Purchase
+              button.btn.btn-secondary(type="button") View Details
+

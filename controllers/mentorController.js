@@ -17,7 +17,11 @@ const saveDetails=async(req,res)=>{
               email:req.body.email,
               description:req.body.description,
               skills:req.body.skills,
-              languages:req.body.languages
+              languages:req.body.languages,
+              //added by parthiv
+              fullname:req.body.fullname,
+              cost:req.body.cost,
+
           });
 
         const mentorProfileData=await mentorProfile.save();
@@ -27,7 +31,7 @@ const saveDetails=async(req,res)=>{
             // sendVerifyMail(req.body.name,req.body.email,userData._id);
             const mentorData=await Mentor.findOne({email:mentorProfileData.email});
             const hasNotification = true
-            res.render('profile',{mentor:mentorData, hasNotification:hasNotification});
+            res.render('profile',{user:mentorData, hasNotification:hasNotification});
           }
           else{
             res.redirect('/signup',{message:"oops,signup failed !"});

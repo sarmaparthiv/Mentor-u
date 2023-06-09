@@ -6,6 +6,11 @@ const profileSchema=new mongoose.Schema(
             type:String,
             required:true
         },
+        //added by parthiv
+        fullname:{
+            type:String,
+            required:true
+        },
         description:{
             type:String,
             required:true
@@ -18,7 +23,12 @@ const profileSchema=new mongoose.Schema(
         languages:{
             type:String,
             required:true
-        }  
+        },
+        //added by parthiv
+        cost:{
+            type:Number,
+            required:true
+        }
     }
 );
 

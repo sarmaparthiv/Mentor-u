@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongodb');
 const User=require('../models/userModel');
-
+const MentorProfile = require('../models/profileModel');
 //using bcrypt
 const bcrypt=require('bcrypt');
 
@@ -67,7 +67,7 @@ const insertUser=async(req,res)=>{
 
 const loginLoad=async(req,res)=>{
     try {
-        res.render('login');
+        res.render('login', {router: "/login"});
     } catch (error) {
         console.log(error.message);
     }
@@ -115,14 +115,18 @@ const loadHome=async(req,res)=>{
 
         // const user = await user.getUser();
         // req.user = user;
-        const userData=await User.findById({ _id:req.session.user_id });
+        const query = MentorProfile.find({});
+        const documents = await query.exec();
+        const documentList = documents.map(doc => doc.toObject());
+        const mentorProfileData=documentList
         const hasNotification = true
-        res.render('profile',{user:userData, hasNotification:hasNotification});
+        res.render('home',{services:mentorProfileData, hasNotification:hasNotification});
         // res.render('profile');
 
         
     } catch (error) {
         console.log(error.message);
+        return [];
     }
 
 }

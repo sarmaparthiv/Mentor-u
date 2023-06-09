@@ -10,6 +10,10 @@ html
 
       input(type="hidden" name="email" value=mentor.email)
 
+      //- fullname added by parthiv
+      label(for="fullname") fullname:
+      textarea#fullname(name="fullname", type="text")
+
       label(for="description") Description:
       textarea#description(name="description", rows="4", cols="50")
 
@@ -18,5 +22,10 @@ html
 
       label(for="languages") Languages:
       input#languages(name="languages", type="text")
+
+      //- cost added by parthiv
+
+      label(for="cost") Cost:
+      input#cost(name="cost", type="number")
 
       input(type="submit", value="Save")
