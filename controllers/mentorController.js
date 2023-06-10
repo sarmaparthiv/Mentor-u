@@ -18,7 +18,11 @@ const saveDetails=async(req,res)=>{
               email:req.body.email,
               description:req.body.description,
               skills:req.body.skills,
-              languages:req.body.languages
+              languages:req.body.languages,
+              //added by parthiv
+              fullname:req.body.fullname,
+              cost:req.body.cost,
+
           });
 
         const mentorProfileData=await mentorProfile.save();
