@@ -1,10 +1,11 @@
 const { ObjectId } = require('mongodb');
 const Mentor=require('../models/mentorModel');
+const User=require('../models/userModel');
 const MentorProfile = require('../models/profileModel')
 
 const professionalDetails=async(req,res)=>{
     try{
-        res.render('professionalDetail');
+        res.render('professionalDetail', {router: "/mentor/save"});
     }catch(error){
         console.log(error.message);
     }
@@ -23,11 +24,10 @@ const saveDetails=async(req,res)=>{
         const mentorProfileData=await mentorProfile.save();
 
         if(mentorProfileData){
-            console.log("here   ")
             // sendVerifyMail(req.body.name,req.body.email,userData._id);
             const mentorData=await Mentor.findOne({email:mentorProfileData.email});
             const hasNotification = true
-            res.render('profile',{mentor:mentorData, hasNotification:hasNotification});
+            res.render('profile',{user:mentorData, hasNotification:hasNotification});
           }
           else{
             res.redirect('/signup',{message:"oops,signup failed !"});
@@ -150,9 +150,9 @@ const loadHome=async(req,res)=>{
         // req.user = user;
         const mentorData=await Mentor.findById({ _id:req.session.user_id });
         const hasNotification = true
-        console.log("let me see", mentorData)
+        
         if (mentorData){
-            res.render('profile',{user:mentorData, hasNotification:hasNotification});
+            res.render('profile',{user:mentorData, hasNotification:hasNotification, router: "/mentor"});
 
         } else{
             res.redirect("/login")
@@ -213,24 +213,62 @@ const jobRequest = async(req, res)=>{
     }
 }
 
-const sendJobRequest = async(req, res)=>{
-    const filter = {email: "mentor1@gmail.com"}
-    const update = {$push: {notifications: {title: "AR Development", description: "Required experienced AR developer"}}}
-    Mentor.updateOne(filter, update)
-}
-
 const loadNotifications = async (req, res) => {
     try {
         // const userData=User.findByIdAndUpdate({ _id:req.body.user_id },{ $set:{fullname:req.body.fullname, username:req.body.username, email:req.body.email, number:req.body.number} });
-        const id = new ObjectId(req.query.id)
-        const mentorData=await Mentor.findById({ _id:id })
+        const mentorData=await Mentor.findById({ _id:req.session.user_id });
+        console.log("let me see", mentorData.notifications)
         res.render('notifications', {notifications:mentorData.notifications});     
     } catch (error) {
         
     }
 }
 
+const jobProceed = async (req, res) => {
+    try {
+        // const mentorData=await Mentor.findById({ _id:req.session.user_id });
+        res.render('jobProceed');     
+    } catch (error) {
+        console.log(error)
+    }
+}
 
+const jobSubmit = async (req, res) => {
+    try {
+        const link = req.body.link
+        const clientEmail = req.body.clientEmail
+        const filter = { email: clientEmail};
+        const update = {
+            $push: {
+            notifications: {
+                title: "AR Development",
+                description: "Required experienced AR developer",
+                link: link
+            },
+            },
+        };
+        await User.updateOne(filter, update);
+        res.redirect('/mentor/home');     
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const jobReject = async (req, res) => {
+    try {
+        const { clientEmail } = req.body;
+        const filter = { 'notifications.clientEmail': clientEmail };
+        const update = {
+        $pull: {
+            notifications: { clientEmail },
+        },
+        };
+        await Mentor.updateOne(filter, update);
+        res.redirect('/mentor/home');   
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 module.exports={
     professionalDetails,
@@ -243,5 +281,8 @@ module.exports={
     userLogout,
     editUser,
     jobRequest,
-    loadNotifications
+    loadNotifications,
+    jobProceed,
+    jobSubmit,
+    jobReject
 }

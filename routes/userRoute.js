@@ -31,6 +31,7 @@ user_route.get('/logout',auth.isLogin,userController.userLogout);
 //setting route for edit
 user_route.get('/edit',auth.isLogin,userController.editUser);
 user_route.get('/jobrequest', auth.isLogin, userController.jobRequest)
+user_route.post('/jobrequest', userController.sendJobRequest)
 // user_route.post('/edit',userController.updateProfile);
 user_route.get('/notifications', auth.isLogin, userController.loadNotifications)
 

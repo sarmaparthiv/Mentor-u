@@ -1,0 +1,14 @@
+html
+  head
+    title Form Example
+    style
+      include ../assets/css/jobProceed.css
+  body
+    h1 Form Example
+    form(action="/mentor/jobsubmit", method="post")
+      .form-group
+        input(type="hidden" name="email" value=clientEmail)
+
+        label(for="link-input") Enter Link:
+        input#link-input.form-control(type="text", name="link", placeholder="Enter link URL")
+      button.btn.btn-primary(type="submit") Submit

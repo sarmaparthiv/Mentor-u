@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongodb');
 const User=require('../models/userModel');
-
+const Mentor = require('../models/mentorModel')
 //using bcrypt
 const bcrypt=require('bcrypt');
 
@@ -67,7 +67,7 @@ const insertUser=async(req,res)=>{
 
 const loginLoad=async(req,res)=>{
     try {
-        res.render('login');
+        res.render('login', {router: "/login"});
     } catch (error) {
         console.log(error.message);
     }
@@ -159,21 +159,20 @@ const editUser=async(req,res)=>{
     }
 }
 
-const jobRequest = async(req, res)=>{
-    try{
-        const id = new ObjectId(req.query.id)
-        const userData=await User.findById({ _id:id })
-        if(userData){
-            res.render('jobRequest',{user:userData});
+    const jobRequest = async(req, res)=>{
+        try{
+            const userData=await User.findById({ _id:req.session.user_id });
+            if(userData){
+                res.render('jobRequest',{user:userData});
+            }
+            else{
+                res.redirect('/home');
+            }
         }
-        else{
-            res.redirect('/home');
+        catch(error){
+            console.log(error.message)
         }
     }
-    catch(error){
-        console.log(error.message)
-    }
-}
 
 const updateProfile=async(req,res)=>{
     try {
@@ -187,10 +186,41 @@ const updateProfile=async(req,res)=>{
 const loadNotifications = async (req, res) => {
     try {
         // const userData=User.findByIdAndUpdate({ _id:req.body.user_id },{ $set:{fullname:req.body.fullname, username:req.body.username, email:req.body.email, number:req.body.number} });
-        const dummyNotifications = [{title:"AI mentor 1 hour session", description:"Need an AI mentor for my college project"}]
-        res.render('notifications', {notifications:dummyNotifications});     
+        userData = await User.findById({_id:req.session.user_id})
+        res.render('notificationsUser', {notifications:userData.notifications});     
     } catch (error) {
         
+    }
+}
+
+const sendJobRequest = async (req, res) => {
+    try {
+      const user = await User.findById({ _id:req.session.user_id })
+      const clientEmail = user.email
+
+      const filter = { email: "ment1@gmail.com" };
+      const update = {
+        $push: {
+          notifications: {
+            title: "AR Development",
+            description: "Required experienced AR developer",
+            clientEmail: clientEmail
+          },
+        },
+      };
+      await Mentor.updateOne(filter, update);
+      res.redirect('/home')
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const viewLink = async (req, res) => {
+    try {
+        const link = req.body.link
+        res.redirect(link)    
+    } catch (error) {
+        console.log(error)
     }
 }
 
@@ -203,5 +233,7 @@ module.exports={
     userLogout,
     editUser,
     jobRequest,
-    loadNotifications
+    loadNotifications,
+    sendJobRequest,
+    viewLink
 }

@@ -36,7 +36,24 @@ const userSchema=new mongoose.Schema(
         is_verified:{
             type:Number,
             default:1
-        }  
+        },
+        notifications: {
+            type: [{
+              title: {
+                type: String,
+                required: true,
+              },
+              description: {
+                type: String,
+                required: true,
+              },
+              link: {
+                type: String,
+                required: true
+              }
+            }],
+            default: [],
+          }  
     }
 );
 

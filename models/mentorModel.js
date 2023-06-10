@@ -47,6 +47,10 @@ const mentorSchema=new mongoose.Schema(
                 type: String,
                 required: true,
               },
+              clientEmail: {
+                type: String,
+                required: true
+              }
             }],
             default: [],
           },
