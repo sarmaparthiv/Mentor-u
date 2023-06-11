@@ -65,5 +65,17 @@ p {
 
 .card-content {
   color: #666; /* Light gray color */
-  /* Add any additional styles you want for the card content */
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: auto; /* Add this property to align the button group to the left */
+}
+
+.button-group a.button {
+  margin-right: 10px;
 }

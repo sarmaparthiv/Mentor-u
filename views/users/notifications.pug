@@ -15,7 +15,8 @@ html
             h2 #{notification.title}
             p #{notification.description}
           .card-actions
-            a.button(href=`/mentor/jobProceed?clientEmail=${notification.clientEmail}`) Accept Job Request
-            form(action="/mentor/jobReject" method="POST")
-              input(type="hidden" name="clientEmail" value=notification.clientEmail)
-              button.button.reject(type="submit") Reject Job Request
+            div.button-group  
+              a.button(href=`/mentor/jobProceed?clientEmail=${notification.clientEmail}`) Accept Job Request
+              form(action="/mentor/jobReject" method="POST")
+                input(type="hidden" name="clientEmail" value=notification.clientEmail)
+                button.button.reject(type="submit") Reject Job Request

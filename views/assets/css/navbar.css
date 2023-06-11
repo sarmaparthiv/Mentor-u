@@ -1,69 +1,64 @@
 .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-brand {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .navbar-nav {
-    display: flex;
-  }
-  
-  .nav-item {
-    margin-left: 15px;
-  }
-  
-  .nav-link {
-    color: #fff;
-    font-size: 18px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    color: #ffcc00;
-  }
-  
-  .button {
-    padding: 8px 16px;
-    border-radius: 4px;
-    background-image: linear-gradient(to bottom, #444444, #222222);
-    color: #fff;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-image 0.3s ease;
-  }
-  
-  .button:hover {
-    background-image: linear-gradient(to bottom, #222222, #000000);
-  }
-  
-  .notification-dot {
-    position: relative;
-  }
-  
-  .notification-dot::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: yellow;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  
-  
-  
-  
-  
-  
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  margin-bottom: 20px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 30px;
+}
+
+.nav-item {
+  margin-left: 15px;
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffcc00;
+}
+
+.button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-image: linear-gradient(to bottom, #444444, #222222);
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-image 0.3s ease;
+}
+
+.button:hover {
+  background-image: linear-gradient(to bottom, #222222, #000000);
+}
+
+.notification-dot {
+  position: relative;
+}
+
+.notification-dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: yellow;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}

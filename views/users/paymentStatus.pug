@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Payment Status
+    style
+      include ../assets/css/paymentStatus.css
+
+  body
+    .container
+      .loader(id="loader")
+      .message(id="message" style="display: none;")
+        h1 Current transaction status:
+        if status === 'paid'
+          p Transaction complete
+          h2 Thanks for booking a session
+          button#goBackButton.btn.btn-primary(style="background-color: #333; color: #aaa; border-radius: 4px;", onclick="goBackToHome()") Go Back
+        else
+          p Transaction failed
+          h2 Please try again
+          button#goBackButton.btn.btn-primary(style="background-color: #333; color: #aaa; border-radius: 4px;", onclick="goBackToHome()") Go Back
+
+  script.
+    const loader = document.getElementById('loader');
+    const message = document.getElementById('message');
+    setTimeout(() => {
+      loader.style.display = 'none';
+      message.style.display = 'block';
+    }, 2000);
+
+    function goBackToHome() {
+      window.history.pushState({}, '', '/home');
+      window.location.reload();
+    }

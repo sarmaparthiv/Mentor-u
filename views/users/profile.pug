@@ -11,7 +11,7 @@ html
         body {
         margin: 0;
         padding: 0;
-        background-image: linear-gradient(to bottom, #ffcccc, #ff9999);
+        background: linear-gradient(to bottom, #555555, #222222);
         font-family: Arial, sans-serif;
         }
 
@@ -64,11 +64,21 @@ html
         font-size: 12px;
         border: none;
         cursor: pointer;
+        text-decoration: none;
         }
 
         .button:hover {
         background-color: #45a049;
-        }
+        color: #fff;
+        text-decoration: none; /* Remove underline */
+      }
+      .button:focus {
+        outline: none; /* Remove blue link outline on focus */
+      }
+      .non-editable {
+        cursor: default;
+        pointer-events: none;
+      }
   body
     include navbar.pug
 
@@ -80,15 +90,13 @@ html
             div.card
               div.cardContent
                 div
+                  div 
+                    img.avatar(src="https://winaero.com/blog/wp-content/uploads/2017/12/User-icon-256-blue.png", alt="osama")
                   div
-                    img.avatar(src="https://ik.imagekit.io/bhanu1776/Freelansters/osama.jpg?updatedAt=1682608749618", alt="osama")
-                  div
-                    h2 #{user.fullname}
-                    p Full Stack Developer
+                    h2 #{mentorData.fullname}
+                    p #{profileData.occupation}
               div.cardActions.button-container
-                button.button(type="button") Edit
-                button.button(type="button") Get Hired
-                button.button(type="button") Post Job
+                  a.button(href="/mentor/edit") EDIT
         div.container
           div
             div.card
@@ -96,17 +104,17 @@ html
                 div
                   div
                     p Name:
-                    p #{user.fullname}
+                    p #{mentorData.fullname}
                 hr
                 div
                   div
                     p Email:
-                    p #{user.email}
+                    p #{mentorData.email}
                 hr
                 div
                   div
                     p Number:
-                    p #{user.number}
+                    p #{mentorData.number}
           div
             div.card
               div.cardContent
@@ -114,4 +122,23 @@ html
                   div
                     p Description:
                     p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nibh orci. Mauris eleifend ex sed neque feugiat, a efficitur lorem tincidunt. Nulla euismod tristique leo, id fermentum justo faucibus ac.
+            div.card
+              div.cardContent
+                div
+                  div
+                    p Skills:
+                    p #{profileData.skills}
+            div.card
+              div.cardContent
+                div
+                  div
+                    p Languages:
+                    p #{profileData.languages}
+            div.card
+              div.cardContent
+                div
+                  div
+                    p Cost:
+                    p ₹ #{profileData.cost} per hour
   script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin="anonymous")
+  

@@ -9,19 +9,20 @@ html
     form(action=router, method="POST")
 
       input(type="hidden" name="email" value=mentor.email)
-
+      input(type="hidden" name="fullname" value=mentor.fullname)
       //- fullname added by parthiv
-      label(for="fullname") fullname:
-      textarea#fullname(name="fullname", type="text")
 
-      label(for="description") Description:
-      textarea#description(name="description", rows="4", cols="50")
+      label(for="occupation") Occupation:
+      textarea#occupation(name="occupation", rows="4", cols="50")
 
       label(for="skills") Skills:
       input#skills(name="skills", type="text")
 
       label(for="languages") Languages:
       input#languages(name="languages", type="text")
+
+      label(for="description") Description:
+      input#description(name="description", type="text")
 
       //- cost added by parthiv
 

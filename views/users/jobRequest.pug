@@ -5,23 +5,27 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Freelancer Details
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC", crossorigin="anonymous")
-
-    //- style
-    //-   include ../assets/css/jobRequest.css
+    link(href="../assets/css/jobRequest.css", rel="stylesheet")
+    style 
+      include ../assets/css/navbar.css
+      include ../assets/css/footer.css
   body
+    include navbar.pug
     .container
-                  
-      div.row
-        div.col-8
-          p.card-text Name: John Doe
-          p.card-text Occupation: Web Developer
-          p.card-text Hourly Rate: $50
-        div.col-4 
-          h5.card-title Job Description
-          p.card-text This is a job description for the freelancer. Provide details about the job here.
-          form(action="/job-request" method="post")
-          input(type="hidden", name="freelancerId", value="#{freelancer._id}")
-          .text-center
-          form(action="/jobrequest", method="post")
-            button(type="submit") Submit
+      .row
+        .col-md-8
+          .card
+            .card-body
+              h5.card-title Freelancer Details
+              p.card-text Name: #{profileData.fullname}
+              p.card-text Occupation: #{profileData.occupation}
+              p.card-text Hourly Rate: ₹ #{profileData.cost}
+        .col-md-4
+          .card.job-description-card
+            .card-body
+              h5.card-title Job Description
+              p.card-text This is a job description for the freelancer. Provide details about the job here.
+              form(action="/payment" method="post")
+                input(type="hidden" name="email" value=profileData.email)    
+                button.button(type="submit") Proceed to payment
   script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin="anonymous")

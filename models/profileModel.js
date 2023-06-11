@@ -11,7 +11,7 @@ const profileSchema=new mongoose.Schema(
             type:String,
             required:true
         },
-        description:{
+        occupation:{
             type:String,
             required:true
         },

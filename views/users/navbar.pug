@@ -1,10 +1,10 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  .container-fluid
-    a.navbar-brand(href='#') Navbar
+  .container-fluid.d-flex.justify-content-center
+    a.navbar-brand(href='#') MentorU
     button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     .collapse.navbar-collapse#navbarSupportedContent
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+      ul.navbar-nav.mr-auto.mb-2.mb-lg-0
         li.nav-item
           a.nav-link.active(href='#', aria-current='page') Home
         li.nav-item
@@ -20,12 +20,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
             li
               a.dropdown-item(href='#') Something else here
         li.nav-item
-          a.nav-link(href="/mentor/notifications")
+          a.nav-link(href=`${router}/notifications`)
             i.bi.bi-bell
             if hasNotification == true
               span.notification-dot
-            //- span.notification-dot(style='background-color: yellow; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-left: 5px;')
-      
-      form.d-flex
-        input.form-control.me-2(type='search', placeholder='Search', aria-label='Search')
-        button.btn.btn-outline-success(type='submit') Search

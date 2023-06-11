@@ -3,6 +3,8 @@ const Mentor=require('../models/mentorModel');
 const User=require('../models/userModel');
 const MentorProfile = require('../models/profileModel')
 
+var profileData;
+
 const professionalDetails=async(req,res)=>{
     try{
         res.render('professionalDetail', {router: "/mentor/save"});
@@ -16,7 +18,7 @@ const saveDetails=async(req,res)=>{
         const mentorProfile = new MentorProfile(
           {
               email:req.body.email,
-              description:req.body.description,
+              occupation:req.body.occupation,
               skills:req.body.skills,
               languages:req.body.languages,
               //added by parthiv
@@ -31,7 +33,7 @@ const saveDetails=async(req,res)=>{
             // sendVerifyMail(req.body.name,req.body.email,userData._id);
             const mentorData=await Mentor.findOne({email:mentorProfileData.email});
             const hasNotification = true
-            res.render('profile',{user:mentorData, hasNotification:hasNotification});
+            res.render('profile',{mentorData:mentorData, hasNotification:hasNotification, profileData:mentorProfileData});
           }
           else{
             res.redirect('/signup',{message:"oops,signup failed !"});
@@ -88,7 +90,7 @@ const insertUser=async(req,res)=>{
           if(mentorData){
 
             // sendVerifyMail(req.body.name,req.body.email,userData._id);
-            res.render('professionalDetail', {mentor:mentor, router:"/mentor/save"});
+            res.render('professionalDetail', {mentor:mentor, router:"/mentor"});
           }
           else{
             res.redirect('/signup',{message:"oops,signup failed !"});
@@ -153,10 +155,14 @@ const loadHome=async(req,res)=>{
         // const user = await user.getUser();
         // req.user = user;
         const mentorData=await Mentor.findById({ _id:req.session.user_id });
-        const hasNotification = true
-        
+        var hasNotification = true
+        if (mentorData.notifications.length == 0){
+            hasNotification = false
+        }
+        const mentorProfileData = await MentorProfile.findOne({email:mentorData.email})
         if (mentorData){
-            res.render('profile',{user:mentorData, hasNotification:hasNotification, router: "/mentor"});
+            profileData = mentorProfileData
+            res.render('profile',{mentorData:mentorData, hasNotification:hasNotification, router: "/mentor", profileData:mentorProfileData});
 
         } else{
             res.redirect("/login")
@@ -185,12 +191,10 @@ const userLogout=async(req,res)=>{
 const editUser=async(req,res)=>{
     try {
         // const id='5f4ebe073c6a0d23745063d0';
-        const id = new ObjectId(req.query.id)
-        const userData=await User.findById({ _id:id });
-        console.log("user data")
-        console.log(userData)
-        if(userData){
-            res.render('edit',{user:userData});
+        const mentorData=await Mentor.findById({ _id:req.session.user_id });
+        const profileData = await MentorProfile.findOne({email:mentorData.email})
+        if(mentorData){
+            res.render('edit',{mentorData:mentorData, profileData:profileData});
         }
         else{
             res.redirect('/home');
@@ -201,19 +205,33 @@ const editUser=async(req,res)=>{
     }
 }
 
-const jobRequest = async(req, res)=>{
-    try{
-        const id = new ObjectId(req.query.id)
-        const userData=await User.findById({ _id:id })
-        if(userData){
-            res.render('jobRequest',{user:userData});
+const updateProfile = async(req,res)=>{
+    try {
+        // const id='5f4ebe073c6a0d23745063d0';
+        const mentorData=await Mentor.findById({ _id:req.session.user_id });
+        const profileData = await MentorProfile.findOne({email:mentorData.email})
+        if(mentorData){
+            mentorData.fullname = req.body.fullname;
+            mentorData.email = req.body.email;
+            mentorData.number = req.body.number;
+
+            // Update profileData
+            profileData.skills = req.body.skills;
+            profileData.languages = req.body.languages;
+            profileData.cost = req.body.cost;
+
+            // Save the updated documents
+            await mentorData.save();
+            await profileData.save();
+            
+            res.redirect('/mentor/home')
         }
         else{
-            res.redirect('/home');
+            res.redirect('/mentor/home');
         }
-    }
-    catch(error){
-        console.log(error.message)
+        
+    } catch (error) {
+        console.log(error.message);
     }
 }
 
@@ -221,7 +239,6 @@ const loadNotifications = async (req, res) => {
     try {
         // const userData=User.findByIdAndUpdate({ _id:req.body.user_id },{ $set:{fullname:req.body.fullname, username:req.body.username, email:req.body.email, number:req.body.number} });
         const mentorData=await Mentor.findById({ _id:req.session.user_id });
-        console.log("let me see", mentorData.notifications)
         res.render('notifications', {notifications:mentorData.notifications});     
     } catch (error) {
         
@@ -231,7 +248,9 @@ const loadNotifications = async (req, res) => {
 const jobProceed = async (req, res) => {
     try {
         // const mentorData=await Mentor.findById({ _id:req.session.user_id });
-        res.render('jobProceed');     
+        const clientEmail = req.query.clientEmail
+        console.log("client Email ", clientEmail)
+        res.render('jobProceed', {clientEmail:clientEmail});     
     } catch (error) {
         console.log(error)
     }
@@ -245,13 +264,21 @@ const jobSubmit = async (req, res) => {
         const update = {
             $push: {
             notifications: {
-                title: "AR Development",
-                description: "Required experienced AR developer",
+                title: profileData.occupation,
+                description: "Here's the link to a session for " + profileData.occupation + " with " + profileData.fullname + ". Invitation has been sent to your mail!",
                 link: link
             },
             },
         };
         await User.updateOne(filter, update);
+
+        const mentorUpdate = {
+        $pull: {
+            notifications: { clientEmail },
+          },
+        };
+        await Mentor.updateOne(filter, mentorUpdate);
+
         res.redirect('/mentor/home');     
     } catch (error) {
         console.log(error)
@@ -284,9 +311,9 @@ module.exports={
     loadHome,
     userLogout,
     editUser,
-    jobRequest,
     loadNotifications,
     jobProceed,
     jobSubmit,
-    jobReject
+    jobReject,
+    updateProfile
 }

@@ -1,0 +1,273 @@
+doctype html
+html
+  head
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Bootstrap CSS
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC', crossorigin='anonymous')
+    // Inserting box-icon css
+    link(href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', rel='stylesheet')
+
+    style 
+        include ../assets/css/landing.css
+    title HomePage
+  // NAVBAR
+  body
+    nav.navbar.navbar-expand-lg.py-3.sticky-top.navbar-light.bg-white
+      .container
+        a.navbar-brand(href='#')
+          h1
+            b MENTOR-U
+        button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.ms-auto
+            li.nav-item
+              a.nav-link(href='#') Become a Mentor
+            li.nav-item
+              a.nav-link(href='#service') Topics
+            li.nav-item.dropdown
+              a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+                | Find Mentors of
+              ul.dropdown-menu(aria-labelledby='navbarDropdown')
+                li
+                  a.dropdown-item(href='#') Coding
+                li
+                  hr.dropdown-divider
+                li
+                  a.dropdown-item(href='#') Finance
+                li
+                  hr.dropdown-divider
+                li
+                  a.dropdown-item(href='#') Mental Health
+                li
+                  hr.dropdown-divider
+                li
+                  a.dropdown-item(href='#') Personal Projects
+            li.nav-item
+          //
+            form.d-flex
+              input.form-control.me-2(type='search', placeholder='Find Mentorship On', aria-label='Search')
+              button.btn.btn-outline-success(type='submit') Search
+          button.btn.btn-primary.ms-lg-3.me-lg-3(onclick='redirectLoginPage()') LOGIN
+          button.btn.btn-primary.me-lg-3(onclick='redirectSignupPage()') SIGNUP
+    // nav ends
+    // HERO
+    .hero.vh-100.d-flex.align-items-center
+      .container
+        .row
+          .col-lg-7.mx-auto.text-center
+            h1.display-4.text-white
+              | GET 1:1 MENTORSHIP FROM EXPERTS
+            p.text-white.my-3
+              | Get personalised help and advise from freelance experts to get your doubts
+              | solved easily. Be it regarding Tech, Finance, Mental Health, or even
+              | your own personalised projects. Book a slot and have all your
+              | answers!
+            a.btn.btn-primary.me-2(href='#') Get Started
+            a.btn.btn-outline-light(href='#') Our experts
+    // hero ends
+    // SERVICES START
+    section#service
+      .container
+        .row.mb-5
+          .col.md-8.mx-auto.text-center
+            h6.text-primary
+            h1 FIND FREELANCE MENTORS OF
+            p
+              //
+                Find mentors to connect to from different fields. Book a session
+                now!
+        .row
+          .col-lg-4.col-sm-6
+            .service.card-effect
+              .iconbox
+                i.bx.bx-code-curly
+              h5.mt-4.mb-2 CODING &amp; DEVELOPMENT
+              p
+                | Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                | Laborum dolor iure mollitia eum, quo praesentium ipsum dolorem? Cupiditate, ipsum non
+              p
+          .col-lg-4.col-sm-6
+            .service.card-effect
+              .iconbox
+                i.bx.bx-brain
+              h5.mt-4.mb-2 MENTAL HEALTH
+              p
+                | Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                | Laborum dolor iure mollitia eum, quo praesentium ipsum dolorem? Cupiditate, ipsum non
+          .col-lg-4.col-sm-6
+            .service.card-effect
+              .iconbox
+                i.bx.bx-money-withdraw
+              h5.mt-4.mb-2 FINANCE
+              p
+                | Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                | Laborum dolor iure mollitia eum, quo praesentium ipsum dolorem? Cupiditate, ipsum non.
+        .row.g-4
+          .col-lg-4.col-sm-6
+            .service.card-effect
+              .iconbox
+                i.bx.bxs-bug
+              h5.mt-4.mb-2 DEBUGGING
+              p
+                | Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                | Laborum dolor iure mollitia eum, quo praesentium ipsum dolorem? Cupiditate, ipsum non.
+          .col-lg-4.col-sm-6
+            .service.card-effect
+              .iconbox
+                i.bx.bxs-notepad
+              h5.mt-4.mb-2 RESUME BUILDING
+              p
+                | Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                | Laborum dolor iure mollitia eum, quo praesentium ipsum dolorem? Cupiditate, ipsum non.
+          .col-lg-4.col-sm-6
+            .service.card-effect
+              .iconbox
+                i.bx.bx-shield-quarter
+              h5.mt-4.mb-2 CYBERSECURITY
+              p
+                | Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                | Laborum dolor iure mollitia eum, quo praesentium ipsum dolorem? Cupiditate, ipsum non.
+    // SERVICES ENDS
+    // PRICES
+    section#prices.bg-light
+      .container
+        .row.mb-5
+          .col-md-8.mx-auto.text-center
+            h6.text-primary PRICING
+            h1 Simple prices
+            p
+              | Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!
+        .row
+          .col-lg-3.col-sm-6
+            .pricing.card-effect
+              h6 10 minute DEMO
+              h1 FREE
+              hr
+              ul.list-unstyled.mb-4
+                li
+                  i.bx.bxs-check-circle
+                  | Chat
+                li
+                  i.bx.bxs-check-circle
+                  | Video-Call
+              button.btn.btn-primary Get Started
+          .col-lg-3.col-sm-6
+            .pricing.card-effect
+              h6 30 minutes SESSION
+              h1 $15
+              hr
+              ul.list-unstyled.mb-4
+                li
+                  i.bx.bxs-check-circle
+                  | Chat
+                li
+                  i.bx.bxs-check-circle
+                  | Video-Call
+              button.btn.btn-primary Get Started
+          .col-lg-3.col-sm-6
+            .pricing.card-effect
+              h6 1 hour SESSION
+              h1 $25
+              hr
+              ul.list-unstyled.mb-4
+                li
+                  i.bx.bxs-check-circle
+                  | Chat
+                li
+                  i.bx.bxs-check-circle
+                  | Video-Call
+              button.btn.btn-primary Get Started
+          .col-lg-3.col-sm-6
+            .pricing.card-effect
+              h6 3 hour SESSION
+              h1 $60
+              hr
+              ul.list-unstyled.mb-4
+                li
+                  i.bx.bxs-check-circle
+                  | Chat
+                li
+                  i.bx.bxs-check-circle
+                  | Video-Call
+              button.btn.btn-primary Get Started
+    // PRICES ENDS
+    // TESTIMONIALS
+    section#testimonials
+      .container
+        .row.mb-5
+          .col-md-8.mx-auto.text-center
+            h6.text-primary TESTIMONIALS
+            h1 What clients say
+            p
+              | Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!
+        .row.g-4
+          .col-lg-4.col-sm-6
+            .testimonial.card-effect
+              blockquote
+                | "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!"
+              img(src='https://via.placeholder.com/150', alt='Testimonial')
+              h5.text-primary.mb-0 John Doe
+              p CEO, ABC Company
+          .col-lg-4.col-sm-6
+            .testimonial.card-effect
+              blockquote
+                | "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!"
+              img(src='https://via.placeholder.com/150', alt='Testimonial')
+              h5.text-primary.mb-0 Jane Smith
+              p CTO, XYZ Company
+          .col-lg-4.col-sm-6
+            .testimonial.card-effect
+              blockquote
+                | "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!"
+              img(src='https://via.placeholder.com/150', alt='Testimonial')
+              h5.text-primary.mb-0 Sarah Johnson
+              p Founder, DEF Company
+    // TESTIMONIALS ENDS
+    // CONTACT
+    section#contact
+      .container
+        .row.mb-5
+          .col-md-8.mx-auto.text-center
+            h6.text-primary CONTACT US
+            h1 Get in touch
+            p
+              | Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!
+        .row
+          .col-lg-6.mx-auto
+            form(action='/submit', method='POST')
+              .row
+                .col-md-6
+                  .form-group
+                    input.form-control(type='text', placeholder='Your Name', required)
+                .col-md-6
+                  .form-group
+                    input.form-control(type='email', placeholder='Your Email', required)
+              .form-group
+                textarea.form-control(rows='4', placeholder='Message', required)
+              button.btn.btn-primary(type='submit') Send Message
+    // CONTACT ENDS
+    // FOOTER
+    footer.bg-dark.text-white.text-center.py-5
+      p
+        | &copy; 2023 MENTOR-U. All Rights Reserved. | Designed by
+        a(href='#') OpenAI
+      .row.justify-content-center.g-4.mt-4
+        .col-lg-2.col-sm-4
+          a(href='#') Terms of Service
+        .col-lg-2.col-sm-4
+          a(href='#') Privacy Policy
+        .col-lg-2.col-sm-4
+          a(href='#') Cookie Policy
+  // FOOTER ENDS
+
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', integrity='sha384-pzjH8g3zyi3xxKeU6z6SyRc9oo9ybz1e5+VZvEE30vT0RYX3FBHGyCThbJPTt9hm', crossorigin='anonymous')
+script(src='../assets/js/landing.js')

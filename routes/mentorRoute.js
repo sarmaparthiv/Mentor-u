@@ -32,8 +32,6 @@ mentor_route.get('/logout',auth.isLogin,mentorController.userLogout);
 
 //setting route for edit
 mentor_route.get('/edit',auth.isLogin,mentorController.editUser);
-mentor_route.get('/jobrequest', auth.isLogin, mentorController.jobRequest)
-mentor_route.post('/jobrequest', auth.isLogin, mentorController.jobRequest)
 
 // user_route.post('/edit',userController.updateProfile);
 mentor_route.get('/notifications', auth.isLogin, mentorController.loadNotifications)
@@ -44,5 +42,6 @@ mentor_route.post('/jobsubmit', mentorController.jobSubmit)
 
 mentor_route.post('/jobReject', mentorController.jobReject)
 
+mentor_route.post('/update-profile', mentorController.updateProfile)
 module.exports=mentor_route;
 

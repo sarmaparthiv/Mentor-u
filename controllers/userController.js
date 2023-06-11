@@ -2,11 +2,19 @@ const { ObjectId } = require('mongodb');
 const User=require('../models/userModel');
 const Mentor = require('../models/mentorModel')
 const MentorProfile = require('../models/profileModel')
+const Transaction = require('../models/transactionModel')
 //using bcrypt
 const bcrypt=require('bcrypt');
-
+require('dotenv').config()
+const SECRET_KEY = process.env.STRIPE_SECRET_KEY
+const stripe = require('stripe')(SECRET_KEY)
 //nodemailer
 // const nodemailer=require("nodemailer");
+
+var transaction = ''
+var transaction_clientMail = ''
+var transaction_mentorMail = ''
+var transaction_occupation = ''
 
 const securePassword=async(password)=>{
     try {
@@ -15,6 +23,14 @@ const securePassword=async(password)=>{
         
     } catch (error) {
         console.log(error.message);
+    }
+}
+
+const loadLanding = async(req, res) => {
+    try{
+        res.render('landing')
+    }catch(error){
+        console.log(error)
     }
 }
 
@@ -120,8 +136,15 @@ const loadHome=async(req,res)=>{
         const documents = await query.exec();
         const documentList = documents.map(doc => doc.toObject());
         const mentorProfileData=documentList
-        const hasNotification = true
-        res.render('home',{services:mentorProfileData, hasNotification:hasNotification});
+
+        const userData = await User.findById({_id:req.session.user_id})
+        var hasNotification = true
+        if (userData.notifications.length == 0){
+            hasNotification = false
+        }
+        const router = ""
+        const user =await User.findById({_id:req.session.user_id})
+        res.render('home',{services:mentorProfileData, hasNotification:hasNotification, user:user, router});
         // res.render('profile');
 
         
@@ -164,27 +187,20 @@ const editUser=async(req,res)=>{
     }
 }
 
-    const jobRequest = async(req, res)=>{
-        try{
-            const userData=await User.findById({ _id:req.session.user_id });
-            if(userData){
-                res.render('jobRequest',{user:userData});
-            }
-            else{
-                res.redirect('/home');
-            }
+const jobRequest = async(req, res)=>{
+    try{
+        const userData=await User.findById({ _id:req.session.user_id });
+        const profileData = await MentorProfile.findOne({email:req.query.email})
+        const mentorData = await Mentor.findOne({email:req.query.email})
+        if(userData){
+            res.render('jobRequest',{user:userData, profileData:profileData, mentorData:mentorData});
         }
-        catch(error){
-            console.log(error.message)
+        else{
+            res.redirect('/home');
         }
     }
-
-const updateProfile=async(req,res)=>{
-    try {
-        const userData=User.findByIdAndUpdate({ _id:req.body.user_id },{ $set:{fullname:req.body.fullname, username:req.body.username, email:req.body.email, number:req.body.number} });
-        res.redirect('/home');     
-    } catch (error) {
-        
+    catch(error){
+        console.log(error.message)
     }
 }
 
@@ -198,17 +214,18 @@ const loadNotifications = async (req, res) => {
     }
 }
 
+
 const sendJobRequest = async (req, res) => {
     try {
       const user = await User.findById({ _id:req.session.user_id })
       const clientEmail = user.email
 
-      const filter = { email: "ment1@gmail.com" };
+      const filter = { email: req.body.email };
       const update = {
         $push: {
           notifications: {
-            title: "AR Development",
-            description: "Required experienced AR developer",
+            title: req.body.occupation,
+            description: "Required experienced " + req.body.occupation,
             clientEmail: clientEmail
           },
         },
@@ -222,9 +239,136 @@ const sendJobRequest = async (req, res) => {
 
   const viewLink = async (req, res) => {
     try {
-        const link = req.body.link
+        console.log("link ", req.query.link)
+        const link = req.query.link
+        req.session.allow = true
         res.redirect(link)    
     } catch (error) {
+        console.log(error)
+    }
+}
+
+const finishSession = async(req, res) => {
+    try{
+        const { link } = req.body;
+        const filter = { 'notifications.link': link };
+        const update = {
+        $pull: {
+            notifications: { link },
+            },
+        };
+        await User.updateOne(filter, update);
+        res.redirect("/notifications");
+    } catch{
+        console.log(error)
+    }
+}
+
+// payment
+
+const createNewCustomer = async(clientEmail) => {
+    try{
+        
+        const customer = await stripe.customers.create({
+            email: clientEmail
+        })
+        return(customer.id)
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+const createPriceForProduct = async (jobName, cost) => {
+
+    try {
+        const product = await stripe.products.create({
+            name: jobName + ' Session',
+          });
+
+        const price = await stripe.prices.create({
+            unit_amount: cost*100,
+            currency: 'inr',
+            product: product.id,
+          });
+
+        return price
+
+    } catch (error){
+        console.log(error)
+    }
+}
+
+const createSession = async (user, mentorProfile) => {    
+    try {
+        const price = await createPriceForProduct(mentorProfile.occupation, mentorProfile.cost)
+        const customer_id = await createNewCustomer(user.email)
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            mode: 'payment',
+            customer: customer_id,
+            success_url: 'http://127.0.0.1:3000/payment-status',
+            cancel_url: 'http://127.0.0.1:3000/home',
+            line_items: [
+                {price: price.id , quantity: 1},
+              ]
+          })
+        return session
+    } catch (error) {
+        console.log(error)
+    }   
+}
+
+const validateSession = async (checkout_session_id) => {
+    try {
+        
+        const session = await stripe.checkout.sessions.retrieve(
+            checkout_session_id
+          );
+
+        return(session.payment_status);
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const makePayment = async(req, res) => {
+    try{
+        const user = await User.findById({_id: req.session.user_id})
+        const profileData = await MentorProfile.findOne({email:req.body.email})
+        const checkoutSession = await createSession(user, profileData)
+        transaction = checkoutSession.id
+        transaction_clientMail = user.email
+        transaction_mentorMail = profileData.email
+        transaction_occupation = profileData.occupation
+        req.session.allow = true
+        res.redirect(checkoutSession.url)
+    } catch (error) {
+        console.log(error)
+    }
+    
+}
+
+const paymentStatus = async(req, res) => {
+    try{
+        const transaction_validate = await validateSession(transaction)
+        if (transaction_validate == 'paid') {
+            const clientEmail = transaction_clientMail
+            const filter = { email:transaction_mentorMail };
+            const update = {
+                $push: {
+                notifications: {
+                    title: transaction_occupation,
+                    description: "Required experienced " + transaction_occupation,
+                    clientEmail: clientEmail
+                },
+                },
+            };
+            await Mentor.updateOne(filter, update);
+        }
+        res.render('paymentStatus', {status:transaction_validate})
+    } catch(error) {
         console.log(error)
     }
 }
@@ -240,5 +384,11 @@ module.exports={
     jobRequest,
     loadNotifications,
     sendJobRequest,
-    viewLink
+    viewLink,
+    createSession,
+    makePayment,
+    validateSession,
+    paymentStatus,
+    finishSession,
+    loadLanding
 }

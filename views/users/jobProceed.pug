@@ -1,13 +1,13 @@
 html
   head
-    title Form Example
+    title Meeting Schedule
     style
       include ../assets/css/jobProceed.css
   body
-    h1 Form Example
+    h1 Meeting Schedule
     form(action="/mentor/jobsubmit", method="post")
       .form-group
-        input(type="hidden" name="email" value=clientEmail)
+        input(type="hidden" name="clientEmail" value=clientEmail)
 
         label(for="link-input") Enter Link:
         input#link-input.form-control(type="text", name="link", placeholder="Enter link URL")
