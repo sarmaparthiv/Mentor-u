@@ -24,12 +24,9 @@ html
         #navbarSupportedContent.collapse.navbar-collapse
           ul.navbar-nav.ms-auto
             li.nav-item
-              a.nav-link(href='#') Become a Mentor
+              a.nav-link(href='/signup-option') Become a Mentor
             li.nav-item
               a.nav-link(href='#service') Topics
-            li.nav-item.dropdown
-              a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
-                | Find Mentors of
               ul.dropdown-menu(aria-labelledby='navbarDropdown')
                 li
                   a.dropdown-item(href='#') Coding
@@ -50,8 +47,8 @@ html
             form.d-flex
               input.form-control.me-2(type='search', placeholder='Find Mentorship On', aria-label='Search')
               button.btn.btn-outline-success(type='submit') Search
-          button.btn.btn-primary.ms-lg-3.me-lg-3(onclick='redirectLoginPage()') LOGIN
-          button.btn.btn-primary.me-lg-3(onclick='redirectSignupPage()') SIGNUP
+          button.btn.btn-primary.ms-lg-3.me-lg-3(type='button', onclick="location.href='login-option'") LOGIN
+          button.btn.btn-primary.me-lg-3(type='button', onclick="location.href='signup-option'") SIGNUP
     // nav ends
     // HERO
     .hero.vh-100.d-flex.align-items-center
@@ -154,7 +151,7 @@ html
                 li
                   i.bx.bxs-check-circle
                   | Video-Call
-              button.btn.btn-primary Get Started
+              button.btn.btn-primary(type='button', onclick="location.href='/'") Get Started
           .col-lg-3.col-sm-6
             .pricing.card-effect
               h6 30 minutes SESSION
@@ -167,7 +164,7 @@ html
                 li
                   i.bx.bxs-check-circle
                   | Video-Call
-              button.btn.btn-primary Get Started
+              button.btn.btn-primary(type='button', onclick="location.href='/'") Get Started
           .col-lg-3.col-sm-6
             .pricing.card-effect
               h6 1 hour SESSION
@@ -180,7 +177,7 @@ html
                 li
                   i.bx.bxs-check-circle
                   | Video-Call
-              button.btn.btn-primary Get Started
+              button.btn.btn-primary(type='button', onclick="location.href='/'") Get Started
           .col-lg-3.col-sm-6
             .pricing.card-effect
               h6 3 hour SESSION
@@ -193,44 +190,9 @@ html
                 li
                   i.bx.bxs-check-circle
                   | Video-Call
-              button.btn.btn-primary Get Started
+              button.btn.btn-primary(type='button', onclick="location.href='/'") Get Started
+
     // PRICES ENDS
-    // TESTIMONIALS
-    section#testimonials
-      .container
-        .row.mb-5
-          .col-md-8.mx-auto.text-center
-            h6.text-primary TESTIMONIALS
-            h1 What clients say
-            p
-              | Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!
-        .row.g-4
-          .col-lg-4.col-sm-6
-            .testimonial.card-effect
-              blockquote
-                | "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!"
-              img(src='https://via.placeholder.com/150', alt='Testimonial')
-              h5.text-primary.mb-0 John Doe
-              p CEO, ABC Company
-          .col-lg-4.col-sm-6
-            .testimonial.card-effect
-              blockquote
-                | "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!"
-              img(src='https://via.placeholder.com/150', alt='Testimonial')
-              h5.text-primary.mb-0 Jane Smith
-              p CTO, XYZ Company
-          .col-lg-4.col-sm-6
-            .testimonial.card-effect
-              blockquote
-                | "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                | Deserunt sit molestiae assumenda alias repudiandae impedit nobis quis error rerum cum!"
-              img(src='https://via.placeholder.com/150', alt='Testimonial')
-              h5.text-primary.mb-0 Sarah Johnson
-              p Founder, DEF Company
-    // TESTIMONIALS ENDS
     // CONTACT
     section#contact
       .container
@@ -258,16 +220,7 @@ html
     // FOOTER
     footer.bg-dark.text-white.text-center.py-5
       p
-        | &copy; 2023 MENTOR-U. All Rights Reserved. | Designed by
-        a(href='#') OpenAI
-      .row.justify-content-center.g-4.mt-4
-        .col-lg-2.col-sm-4
-          a(href='#') Terms of Service
-        .col-lg-2.col-sm-4
-          a(href='#') Privacy Policy
-        .col-lg-2.col-sm-4
-          a(href='#') Cookie Policy
-  // FOOTER ENDS
+        | &copy; 2023 MENTOR-U. All Rights Reserved.
 
 script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', integrity='sha384-pzjH8g3zyi3xxKeU6z6SyRc9oo9ybz1e5+VZvEE30vT0RYX3FBHGyCThbJPTt9hm', crossorigin='anonymous')
 script(src='../assets/js/landing.js')

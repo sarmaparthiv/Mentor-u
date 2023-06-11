@@ -12,7 +12,7 @@ html(lang="en")
   body
     include navbar.pug
     main.container
-      h1 Welcome #{user.fullname}
+      h1 Welcome, #{user.fullname}!
       hr
       .row
         each service in services
@@ -24,7 +24,7 @@ html(lang="en")
                   p.card-text Skills: #{service.skills}
                   p.card-text Mentor Name: #{service.fullname}
                   p.card-text Language spoken: #{service.languages}
-                  p.card-text Price: #{service.cost}/hr
+                  p.card-text Price: ₹ #{service.cost}/hr
                 .card-footer
                   input(type="hidden" name="skills" value=service.skills)
                   input(type="hidden" name="occupation" value=service.occupation)

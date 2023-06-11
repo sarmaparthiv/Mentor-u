@@ -28,7 +28,9 @@ mentor_route.get('/login',auth.isLogout,mentorController.loginLoad);
 mentor_route.post('/login',mentorController.verifyLogin);
 mentor_route.get('/home',auth.isLogin,mentorController.loadHome);
 
-mentor_route.get('/logout',auth.isLogin,mentorController.userLogout);
+mentor_route.get('/logout',auth.isLogin,mentorController.mentorLogout);
+
+mentor_route.get('/contact', auth.isLogin, mentorController.contact)
 
 //setting route for edit
 mentor_route.get('/edit',auth.isLogin,mentorController.editUser);

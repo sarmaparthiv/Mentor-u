@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Contact Us
+    style
+      include ../assets/css/contact.css
+
+  body
+    .container
+      h1 Contact Us
+      form(action="/submit", method="post")
+        .form-group
+          label(for="name") Name
+          input#name.form-control(type="text", name="name", placeholder="Enter your name", required)
+        .form-group
+          label(for="email") Email
+          input#email.form-control(type="email", name="email", placeholder="Enter your email", required)
+        .form-group
+          label(for="description") Description
+          textarea#description.form-control(name="description", placeholder="Enter your message", required)
+        button.btn.btn-primary(type="submit") Send

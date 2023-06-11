@@ -6,21 +6,14 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .collapse.navbar-collapse#navbarSupportedContent
       ul.navbar-nav.mr-auto.mb-2.mb-lg-0
         li.nav-item
-          a.nav-link.active(href='#', aria-current='page') Home
+          a.nav-link.active(href=`${router}/home`, aria-current='page') Home
         li.nav-item
-          a.nav-link(href='#') Link
+          a.nav-link(href=`${router}/contact`) Contact Us
         li.nav-item.dropdown
-          a.nav-link.dropdown-toggle(href='#', id='navbarDropdown', role='button', data-bs-toggle='dropdown', aria-expanded='false') Dropdown
-          ul.dropdown-menu(aria-labelledby='navbarDropdown')
-            li
-              a.dropdown-item(href='#') Action
-            li
-              a.dropdown-item(href='#') Another action
-            li.divider.dropdown-divider
-            li
-              a.dropdown-item(href='#') Something else here
+          a.dropdown-item(href=`${router}/logout`) Logout
         li.nav-item
           a.nav-link(href=`${router}/notifications`)
             i.bi.bi-bell
-            if hasNotification == true
+            if hasNotification
               span.notification-dot
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js')

@@ -71,6 +71,10 @@ html
         color: #666; /* Optional styling to visually indicate non-editability */
       }
 
+      .description-input {
+        height: 100px; /* Increase the height of the description input field */
+      }
+
   body
     include navbar.pug
 
@@ -81,7 +85,7 @@ html
             div.card
               div.cardContent
                 div.text-center
-                  img.avatar(src="https://ik.imagekit.io/bhanu1776/Freelansters/osama.jpg?updatedAt=1682608749618", alt="osama")
+                  img.avatar(src="https://winaero.com/blog/wp-content/uploads/2017/12/User-icon-256-blue.png", alt="osama")
                   div
                     h2 #{mentorData.fullname}
                     p #{profileData.occupation}
@@ -115,7 +119,7 @@ html
                 div
                   div
                     p Description:
-                    textarea(name="description", class="form-control") Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nibh orci. Mauris eleifend ex sed neque feugiat, a efficitur lorem tincidunt. Nulla euismod tristique leo, id fermentum justo faucibus ac.
+                    input(type="text", value=profileData.description, name="Description", class="form-control description-input")
 
         div.row.justify-content-center
           div.col-md-6

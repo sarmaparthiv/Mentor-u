@@ -20,6 +20,7 @@
 
 .nav-item {
   margin-left: 15px;
+  position: relative; /* Added position: relative for dropdown positioning */
 }
 
 .nav-link {
@@ -61,4 +62,44 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position the dropdown below the parent item */
+  left: 0;
+  z-index: 1000;
+  display: none; /* Hide the dropdown by default */
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.dropdown-item:hover {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.show {
+  display: block; /* Show the dropdown when active */
 }

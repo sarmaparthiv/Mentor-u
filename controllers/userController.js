@@ -68,7 +68,7 @@ const insertUser=async(req,res)=>{
           if(userData){
 
             // sendVerifyMail(req.body.name,req.body.email,userData._id);
-            res.render('signup',{message:"Sign up has been sucessful"});
+            res.redirect('/login');
           }
           else{
             res.render('signup',{message:"oops,signup failed !"});
@@ -87,6 +87,22 @@ const loginLoad=async(req,res)=>{
         res.render('login', {router: "/login"});
     } catch (error) {
         console.log(error.message);
+    }
+}
+
+const loginOptions=async(req, res) => {
+    try{
+        res.render('loginOption')
+    }catch(error) {
+        console.log(error)
+    }
+}
+
+const signupOptions=async(req, res) => {
+    try{
+        res.render('signupOption')
+    }catch(error) {
+        console.log(error)
     }
 }
 
@@ -185,6 +201,15 @@ const editUser=async(req,res)=>{
     } catch (error) {
         console.log(error.message);
     }
+}
+
+const contact=async(req,res)=>{
+    try {
+        res.render('contact')
+    } catch (error) {
+        console.log(error.message);
+    }
+
 }
 
 const jobRequest = async(req, res)=>{
@@ -390,5 +415,8 @@ module.exports={
     validateSession,
     paymentStatus,
     finishSession,
-    loadLanding
+    loadLanding,
+    loginOptions,
+    signupOptions,
+    contact
 }

@@ -17,14 +17,18 @@ const userController=require("../controllers/userController");
 user_route.get('/signup',auth.isLogout,userController.loadSignup);
 
 user_route.post('/signup',userController.insertUser);
+user_route.get('/signup-option', userController.signupOptions)
 
 user_route.get('/',auth.isLogout,userController.loadLanding);
+user_route.get('/login-option', userController.loginOptions)
 user_route.get('/login',auth.isLogout,userController.loginLoad);
 
 user_route.post('/login',userController.verifyLogin);
 user_route.get('/home',auth.isLogin,userController.loadHome);
 
 user_route.get('/logout',auth.isLogin,userController.userLogout);
+
+user_route.get('/contact', auth.isLogin, userController.contact)
 
 //setting route for edit
 user_route.get('/edit',auth.isLogin,userController.editUser);

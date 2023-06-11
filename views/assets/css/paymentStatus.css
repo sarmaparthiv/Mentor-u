@@ -1,10 +1,11 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, #f1f1f1, #222222);
+}
   
   .loader {
     border: 8px solid #f3f3f3;
@@ -26,19 +27,22 @@
   
   .message {
     text-align: center;
+    color: #fff;
   }
   
   .message h1 {
     font-size: 24px;
+    color: #fff;
   }
   
   .message p {
     font-size: 18px;
+    color: #ccc;
   }
   
   .message h2 {
     font-size: 20px;
-    color: #555555;
+    color: #aaa;
     margin-top: 10px;
   }
   

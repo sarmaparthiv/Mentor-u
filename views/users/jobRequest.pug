@@ -24,7 +24,7 @@ html(lang="en")
           .card.job-description-card
             .card-body
               h5.card-title Job Description
-              p.card-text This is a job description for the freelancer. Provide details about the job here.
+              p.card-text #{profileData.description}
               form(action="/payment" method="post")
                 input(type="hidden" name="email" value=profileData.email)    
                 button.button(type="submit") Proceed to payment

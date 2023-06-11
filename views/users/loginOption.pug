@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Login Options
+    style 
+        include ../assets/css/loginOption.css
+  
+  body
+    .container
+      .col
+        a.login-button(href='/mentor/login')
+          | Login as Mentor
+        p.description The community of mentors!
+      .col
+        a.login-button(href='/login')
+          | Login as Client
+        p.description The community of learners!
