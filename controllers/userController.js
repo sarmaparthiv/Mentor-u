@@ -384,8 +384,8 @@ const paymentStatus = async(req, res) => {
             const update = {
                 $push: {
                 notifications: {
-                    title: clientData.fullname,
-                    description: "Required experienced " + transaction_occupation,
+                    title: "Job request from " + clientData.fullname,
+                    description: "Required experienced " + transaction_occupation + " mentor!",
                     clientEmail: clientEmail
                 },
                 },
