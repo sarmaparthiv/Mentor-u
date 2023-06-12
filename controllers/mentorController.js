@@ -296,15 +296,17 @@ const jobSubmit = async (req, res) => {
 
 const jobReject = async (req, res) => {
     try {
-        const { clientEmail } = req.body;
-        const filter = { 'notifications.clientEmail': clientEmail };
-        const update = {
+        const clientEmail = req.body.clientEmail
+        const mentorData = await Mentor.findById({_id:req.session.user_id})
+        filter = {email: mentorData.email}
+        const mentorUpdate = {
         $pull: {
             notifications: { clientEmail },
-        },
+          },
         };
-        await Mentor.updateOne(filter, update);
-        res.redirect('/mentor/home');   
+        await Mentor.updateOne(filter, mentorUpdate);
+
+        res.redirect('/mentor/home');
     } catch (error) {
         console.log(error)
     }

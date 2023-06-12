@@ -2,7 +2,6 @@ const { ObjectId } = require('mongodb');
 const User=require('../models/userModel');
 const Mentor = require('../models/mentorModel')
 const MentorProfile = require('../models/profileModel')
-const Transaction = require('../models/transactionModel')
 //using bcrypt
 const bcrypt=require('bcrypt');
 require('dotenv').config()
@@ -380,11 +379,12 @@ const paymentStatus = async(req, res) => {
         const transaction_validate = await validateSession(transaction)
         if (transaction_validate == 'paid') {
             const clientEmail = transaction_clientMail
+            const clientData = await User.findById({_id:req.session.user_id})
             const filter = { email:transaction_mentorMail };
             const update = {
                 $push: {
                 notifications: {
-                    title: transaction_occupation,
+                    title: clientData.fullname,
                     description: "Required experienced " + transaction_occupation,
                     clientEmail: clientEmail
                 },

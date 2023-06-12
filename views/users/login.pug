@@ -26,12 +26,7 @@ html(lang='en')
             i.error.error-icon.fas.fa-exclamation-circle
           .error.error-txt Password can't be blank
         .pass-txt
-          a(href='#') Forgot password?
         input(type='submit', value='Login')
-      .sign-txt
-        | Not yet member?  
-        a(href=`${router}/signup`) Signup now
-    script(src='script.js')
 
     -if (typeof message !== 'undefined')
 p(style="color:green;") #{message}
