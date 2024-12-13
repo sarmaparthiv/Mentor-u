@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 //url encoding
 app.use(bodyParser.urlencoded({extended:true})) //passing extended true as a object
 
+
 //for user routes
 // app.use(express.static('/public'));
 
@@ -20,7 +21,7 @@ const mentorRoute=require('./routes/mentorRoute')
 app.use('/',userRoute);
 app.use('/mentor',mentorRoute);
 app.listen(3000,function(){ 
-            console.log("Server is running..");
+            console.log("Server is running at https://127.0.0.1:3000/");
 });
 
 

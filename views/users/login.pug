@@ -1,0 +1,37 @@
+doctype html
+//- // Coding By CodingNepal - youtube.com/codingnepal
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    //- title Login Form validation in HTML &amp; CSS | CodingNepal
+    //- link(rel='stylesheet', href='/views/assets/login.css')
+    style
+        include ../assets/css/loginn.css
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css')
+  body
+    .wrapper
+      header Login Form
+      form(action='/login' method='POST' id='myform2' )
+        .field.email
+          .input-area
+            input(type='text', name="email",placeholder='Email Address',required='')
+            i.icon.fas.fa-envelope
+            i.error.error-icon.fas.fa-exclamation-circle
+          .error.error-txt Email can&apos;t be blank
+        .field.password
+          .input-area
+            input(type='password',name="password",placeholder='Password',required='')
+            i.icon.fas.fa-lock
+            i.error.error-icon.fas.fa-exclamation-circle
+          .error.error-txt Password can&apos;t be blank
+        .pass-txt
+          a(href='#') Forgot password?
+        input(type='submit', value='Login')
+      .sign-txt
+        | Not yet member? 
+        a(href='#') Signup now
+    script(src='script.js')
+
+    -if (typeof message !== 'undefined')
+p(style="color:green;") #{message}

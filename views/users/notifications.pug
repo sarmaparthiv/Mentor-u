@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Notifications
+    style 
+        include ../assets/css/notifications.css
+
+  body
+    h1 Notifications
+
+    .container
+      each notification in notifications
+        .card
+          .card-content
+            h2 #{notification.title}
+            p #{notification.message}
+          .card-actions
+            a.button(href=notification.jobLink) Accept Job Request
